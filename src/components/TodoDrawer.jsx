@@ -31,22 +31,18 @@ const TodoDrawer = ({ isOpen, onClose, todo, onSave }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("In handleSubmit");
-    console.log(formData);
     onSave({ ...todo, ...formData });
   };
 
   return (
     <div className={`fixed inset-0 bg-black bg-opacity-50 z-50 ${isOpen ? 'block' : 'hidden'}`}>
       <div
-        className={`fixed bg-white z-50 shadow-lg p-4 transition-transform ${
+        className={`fixed bg-white z-50 shadow-lg p-4 overflow-y-auto transition-transform transform ${
           isOpen
-            ? 'transform translate-x-0'
-            : 'transform translate-x-full'
+            ? 'translate-x-0'
+            : 'translate-x-full'
         } ${
-          window.innerWidth < 768
-            ? 'bottom-0 left-0 right-0 h-1/2'
-            : 'right-0 top-0 bottom-0 w-1/3'
+          'right-0 top-0 bottom-0 w-full sm:w-1/3'
         }`}
       >
         <div className="flex justify-between items-center border-b pb-2 mb-4">
