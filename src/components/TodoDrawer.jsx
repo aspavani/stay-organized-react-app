@@ -8,6 +8,7 @@ const TodoDrawer = ({ isOpen, onClose, todo, onSave }) => {
     category: todo.category,
     deadline: todo.deadline,
     priority: todo.priority,
+    completed: todo.completed,
   });
 
   useEffect(() => {
@@ -16,19 +17,22 @@ const TodoDrawer = ({ isOpen, onClose, todo, onSave }) => {
       category: todo.category,
       deadline: todo.deadline,
       priority: todo.priority,
+      completed: todo.completed,
     });
   }, [todo]);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
-      [name]: value,
+      [name]: type === 'checkbox' ? checked : value,
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("In handleSubmit");
+    console.log(formData);
     onSave({ ...todo, ...formData });
   };
 
@@ -94,6 +98,16 @@ const TodoDrawer = ({ isOpen, onClose, todo, onSave }) => {
               <option value="Medium">Medium</option>
               <option value="High">High</option>
             </select>
+          </label>
+          <label className="flex items-center">
+            <input
+              type="checkbox"
+              name="completed"
+              checked={formData.completed}
+              onChange={handleChange}
+              className="mr-2"
+            />
+            Completed
           </label>
           <button type="submit" className="bg-blue-500 text-white p-2 rounded">
             Save Changes

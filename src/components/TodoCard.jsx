@@ -1,14 +1,20 @@
 // TodoCard.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaEdit, FaCheck } from 'react-icons/fa';
 import TodoDrawer from './TodoDrawer';
 
+
 const TodoCard = ({ todo, user, updateTodo }) => {
+    console.log("in todocard prop");
+    console.log(todo);
   const [isCompleted, setIsCompleted] = useState(todo.completed);
+  console.log("iscomplted is " + Boolean(todo.completed) + "direct" + todo.completed + isCompleted);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  console.log("In todocard");
-  console.log(user);
-  console.log(todo);
+  
+  useEffect(() => {
+    setIsCompleted(todo.completed);
+  }, [todo.completed]);
+
   const handleCheckboxChange = () => {
     fetch(`http://localhost:8083/api/todos/${todo.id}`, {
       method: 'PUT',
@@ -38,6 +44,8 @@ const TodoCard = ({ todo, user, updateTodo }) => {
       .then(response => response.json())
       .then(savedTodo => {
         setIsDrawerOpen(false);
+        console.log("In todocard");
+        console.log(savedTodo);
         updateTodo(savedTodo);
         
       })
