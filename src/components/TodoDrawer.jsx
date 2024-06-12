@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaTimes } from 'react-icons/fa';
 
-const TodoDrawer = ({ isOpen, onClose, todo, onSave }) => {
+const TodoDrawer = ({ isOpen, onClose, todo, onSave, isCreateMode }) => {
   const [formData, setFormData] = useState({
     description: todo.description,
     category: todo.category,
@@ -47,15 +47,11 @@ const TodoDrawer = ({ isOpen, onClose, todo, onSave }) => {
     <div className={`fixed inset-0 bg-black bg-opacity-50 z-50 ${isOpen ? 'block' : 'hidden'}`}>
       <div
         className={`fixed bg-white z-50 shadow-lg p-4 overflow-y-auto transition-transform transform ${
-          isOpen
-            ? 'translate-x-0'
-            : 'translate-x-full'
-        } ${
-          'right-0 top-0 bottom-0 w-full sm:w-1/3'
-        }`}
+          isOpen ? 'translate-x-0' : 'translate-x-full'
+        } right-0 top-0 bottom-0 w-full sm:w-1/3`}
       >
         <div className="flex justify-between items-center border-b pb-2 mb-4">
-          <h2 className="text-xl font-bold">Edit Todo</h2>
+          <h2 className="text-xl font-bold">{isCreateMode ? 'Create Todo' : 'Edit Todo'}</h2>
           <button onClick={onClose}>
             <FaTimes />
           </button>
