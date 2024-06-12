@@ -10,22 +10,38 @@ const Todos = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch users and todos concurrently
-    Promise.all([
-      fetch('http://localhost:8083/api/users/').then(response => response.json()),
-      fetch('http://localhost:8083/api/todos').then(response => response.json())
-    ])
-      .then(([usersData, todosData]) => {
-        setUsers(usersData);
-        setTodos(todosData);
-        setSelectedUser(usersData[0]?.id || ''); // Select the first user by default
+    // Fetch users
+    fetch('http://localhost:8083/api/users/')
+      .then(response => response.json())
+      .then(data => {
+        setUsers(data);
+        if (data.length > 0) {
+          setSelectedUser(data[0].id); // Select the first user by default
+        }
         setLoading(false);
       })
       .catch(error => {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching users:', error);
         setLoading(false);
       });
   }, []);
+
+  useEffect(() => {
+    if (selectedUser) {
+      setLoading(true);
+      // Fetch todos for the selected user
+      fetch(`http://localhost:8083/api/todos/byuser/${selectedUser}`)
+        .then(response => response.json())
+        .then(data => {
+          setTodos(data);
+          setLoading(false);
+        })
+        .catch(error => {
+          console.error('Error fetching todos:', error);
+          setLoading(false);
+        });
+    }
+  }, [selectedUser]);
 
   return (
     <Layout>
@@ -49,7 +65,7 @@ const Todos = () => {
           <p>Loading...</p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {todos.filter(todo => todo.userid === parseInt(selectedUser)).map(todo => (
+            {todos.map(todo => (
               <TodoCard key={todo.id} todo={todo} user={users.find(user => user.id === todo.userid)} />
             ))}
           </div>
