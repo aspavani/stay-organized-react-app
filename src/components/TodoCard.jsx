@@ -53,7 +53,9 @@ const TodoCard = ({ todo, user, updateTodo }) => {
         console.error('Error saving todo:', error);
       });
   };
-
+  console.log("Here");
+  console.log(todo);
+  console.log(user);
   return (
     <>
       <div className="border rounded shadow p-4 flex flex-col justify-between">

@@ -10,6 +10,15 @@ const TodoDrawer = ({ isOpen, onClose, todo, onSave }) => {
     priority: todo.priority,
     completed: todo.completed,
   });
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    // Fetch categories from the API
+    fetch('http://localhost:8083/api/categories')
+      .then(response => response.json())
+      .then(data => setCategories(data))
+      .catch(error => console.error('Error fetching categories', error));
+  }, []);
 
   useEffect(() => {
     setFormData({
@@ -64,13 +73,18 @@ const TodoDrawer = ({ isOpen, onClose, todo, onSave }) => {
           </label>
           <label>
             Category
-            <input
-              type="text"
+            <select
               name="category"
               value={formData.category}
               onChange={handleChange}
               className="w-full p-2 border rounded"
-            />
+            >
+              {categories.map((category) => (
+                <option key={category.id} value={category.name}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
           </label>
           <label>
             Deadline
