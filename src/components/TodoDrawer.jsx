@@ -52,6 +52,12 @@ const TodoDrawer = ({ isOpen, onClose, todo, onSave, isCreateMode }) => {
       description: formData.description,
       completed: isCreateMode? false:formData.completed,
     };
+    setFormData({
+        description: '',
+        category: '',
+        deadline: '',
+        priority: 'Low',
+      });
     onSave(newTodo);
   };
 
