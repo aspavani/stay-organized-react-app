@@ -51,17 +51,19 @@ const Todos = () => {
   };
 
   const handleCreateNewTodo = () => {
+    const userId = selectedUser ? parseInt(selectedUser, 10) : (users.length > 0 ? users[0].id : 0);
+    
     setCurrentTodo({
       description: '',
       category: '',
       deadline: '',
       priority: 'Low',
-      completed: false,
-      userid: selectedUser
+      userid: userId
     });
     setIsCreateMode(true);
     setIsDrawerOpen(true);
   };
+  
 
   const handleEditTodo = (todo) => {
     setCurrentTodo(todo);

@@ -4,11 +4,10 @@ import { FaTimes } from 'react-icons/fa';
 
 const TodoDrawer = ({ isOpen, onClose, todo, onSave, isCreateMode }) => {
   const [formData, setFormData] = useState({
-    description: todo.description,
-    category: todo.category,
-    deadline: todo.deadline,
-    priority: todo.priority,
-    completed: todo.completed,
+    description: '',
+    category: '',
+    deadline: '',
+    priority: 'Low',
   });
   const [categories, setCategories] = useState([]);
 
@@ -21,26 +20,39 @@ const TodoDrawer = ({ isOpen, onClose, todo, onSave, isCreateMode }) => {
   }, []);
 
   useEffect(() => {
-    setFormData({
-      description: todo.description,
-      category: todo.category,
-      deadline: todo.deadline,
-      priority: todo.priority,
-      completed: todo.completed,
-    });
-  }, [todo]);
+    if (!isCreateMode) {
+      setFormData({
+        description: todo.description,
+        category: todo.category,
+        deadline: todo.deadline,
+        priority: todo.priority,
+        completed: todo.completed
+      });
+    }
+  }, [todo, isCreateMode]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData((prevFormData) => ({
+    setFormData(prevFormData => ({
       ...prevFormData,
       [name]: type === 'checkbox' ? checked : value,
     }));
   };
 
+
+  
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSave({ ...todo, ...formData });
+    const newTodo = {
+      userid: todo.userid,
+      category: formData.category,
+      deadline: formData.deadline,
+      priority: formData.priority,
+      description: formData.description,
+      completed: isCreateMode? false:formData.completed,
+    };
+    onSave(newTodo);
   };
 
   return (
@@ -65,6 +77,7 @@ const TodoDrawer = ({ isOpen, onClose, todo, onSave, isCreateMode }) => {
               value={formData.description}
               onChange={handleChange}
               className="w-full p-2 border rounded"
+              required
             />
           </label>
           <label>
@@ -74,8 +87,10 @@ const TodoDrawer = ({ isOpen, onClose, todo, onSave, isCreateMode }) => {
               value={formData.category}
               onChange={handleChange}
               className="w-full p-2 border rounded"
+              required
             >
-              {categories.map((category) => (
+              <option value="">Select Category</option>
+              {categories.map(category => (
                 <option key={category.id} value={category.name}>
                   {category.name}
                 </option>
@@ -90,6 +105,7 @@ const TodoDrawer = ({ isOpen, onClose, todo, onSave, isCreateMode }) => {
               value={formData.deadline}
               onChange={handleChange}
               className="w-full p-2 border rounded"
+              required
             />
           </label>
           <label>
@@ -99,24 +115,27 @@ const TodoDrawer = ({ isOpen, onClose, todo, onSave, isCreateMode }) => {
               value={formData.priority}
               onChange={handleChange}
               className="w-full p-2 border rounded"
+              required
             >
               <option value="Low">Low</option>
               <option value="Medium">Medium</option>
               <option value="High">High</option>
             </select>
           </label>
-          <label className="flex items-center">
-            <input
-              type="checkbox"
-              name="completed"
-              checked={formData.completed}
-              onChange={handleChange}
-              className="mr-2"
-            />
-            Completed
-          </label>
+          {!isCreateMode && (
+            <label className="flex items-center">
+              <input
+                type="checkbox"
+                name="completed"
+                checked={formData.completed}
+                onChange={handleChange}
+                className="mr-2"
+              />
+              Completed
+            </label>
+          )}
           <button type="submit" className="bg-blue-500 text-white p-2 rounded">
-            Save Changes
+            {isCreateMode ? 'Create Todo' : 'Save Changes'}
           </button>
         </form>
       </div>
