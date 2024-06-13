@@ -115,7 +115,7 @@ const Register = () => {
             required
           />
         </label>
-        <button type="submit" className="bg-blue-500 text-white p-2 rounded mt-4">
+        <button type="submit" className="bg-yellow-500 text-white p-2 rounded mt-4">
           Register
         </button>
       </form>
