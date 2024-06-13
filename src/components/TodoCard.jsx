@@ -1,15 +1,16 @@
 // TodoCard.jsx
 import React, { useState, useEffect } from 'react';
-import { FaEdit, FaCheck } from 'react-icons/fa';
+import { FaEdit, FaCheck ,FaTrash} from 'react-icons/fa';
 import TodoDrawer from './TodoDrawer';
 
 
-const TodoCard = ({ todo, user, updateTodo }) => {
+const TodoCard = ({ todo, user, updateTodo, deleteTodo }) => {
     console.log("in todocard prop");
     console.log(todo);
   const [isCompleted, setIsCompleted] = useState(todo.completed);
   console.log("iscomplted is " + Boolean(todo.completed) + "direct" + todo.completed + isCompleted);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   
   useEffect(() => {
     setIsCompleted(todo.completed);
@@ -53,12 +54,18 @@ const TodoCard = ({ todo, user, updateTodo }) => {
         console.error('Error saving todo:', error);
       });
   };
-  console.log("Here");
-  console.log(todo);
-  console.log(user);
+
+  const handleDelete = () => {
+    if (window.confirm(`Are you sure you want to delete "${todo.description}"?`)) {
+      deleteTodo(todo.id);
+    }
+  };
+
   return (
     <>
-      <div className="border rounded shadow p-4 flex flex-col justify-between">
+      <div className="border rounded shadow p-4 flex flex-col justify-between"
+             onMouseEnter={() => setIsHovered(true)}
+             onMouseLeave={() => setIsHovered(false)}>
         <div>
           <h3 className="text-xl font-bold mb-2">{todo.description}</h3>
           <p><strong>User:</strong> {user.name} ({user.username})</p>
@@ -74,6 +81,13 @@ const TodoCard = ({ todo, user, updateTodo }) => {
           >
             <FaEdit />
           </button>
+
+          {isHovered && (
+            <button className="text-red-500 hover:text-red-700" onClick={handleDelete}>
+              <FaTrash />
+            </button>
+          )}
+
           {isCompleted ? (
             <FaCheck className="text-green-500" />
           ) : (

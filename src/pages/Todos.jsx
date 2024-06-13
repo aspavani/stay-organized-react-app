@@ -90,6 +90,18 @@ const Todos = () => {
     }
   };
 
+  const deleteTodo = (todoId) => {
+    fetch(`http://localhost:8083/api/todos/${todoId}`, {
+      method: 'DELETE',
+    })
+      .then(() => {
+        setTodos(todos.filter(todo => todo.id !== todoId));
+        console.log('Todo deleted successfully');
+      })
+      .catch(error => {
+        console.error('Error deleting todo:', error);
+      });
+  };
   return (
     <Layout>
       <div className="container mx-auto px-4">
@@ -123,6 +135,7 @@ const Todos = () => {
               user={users.find(user => user.id === todo.userid)}
               updateTodo={updateTodo}
               onEdit={() => handleEditTodo(todo)}
+              deleteTodo={deleteTodo}
             />
           ))}
         </div>
