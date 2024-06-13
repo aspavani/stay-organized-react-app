@@ -12,6 +12,7 @@ const Todos = () => {
   const [currentTodo, setCurrentTodo] = useState(null);
   const [isCreateMode, setIsCreateMode] = useState(false);
   const [filterOption, setFilterOption] = useState('all'); // Default filter option
+  const [searchTerm, setSearchTerm] = useState("");
 
 
   useEffect(() => {
@@ -116,14 +117,19 @@ const Todos = () => {
       return true; // show all
     }
   });
+  
+  const filteredTodosSearch = filteredTodos.filter((todo) => {
+    const matchesSearch = todo.description
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+    return matchesSearch;
+  });
+  
   return (
     <Layout>
       <div className="container mx-auto px-4">
         <h1 className="text-3xl text-yellow-500 font-bold mb-2 mt-6 text-center">Manage Todos</h1>
-        <p className="text-lg text-gray-500 mb-2 text-center">Because even genies need to stay organized! 🧞‍♂️✨</p>
-        {/* &#129502;&#8205;&#9794;&#65039; */}
-        {/* &#10024 */}
-        {/* <p className="text-md mb-8 text-center">Keep your tasks under control, one click at a time!</p> */}
+        <p className="text-lg text-gray-500 text-center mb-10">Because even genies need to stay organized! &#129502;&#8205;&#9794;&#65039;&#10024;</p>
         <div className="mb-4 flex justify-between items-center">
           <select
             value={selectedUser}
@@ -137,6 +143,13 @@ const Todos = () => {
           </select>
           {selectedUser && (
             <>
+          <input
+            type="text"
+            placeholder='Search'
+            value={searchTerm} 
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="p-2 border rounded"
+           />
           <select
             value={filterOption}
             onChange={(e) => setFilterOption(e.target.value)}
@@ -149,7 +162,7 @@ const Todos = () => {
        
             <button
               onClick={handleCreateNewTodo}
-              className="p-2 bg-yellow-500 text-white rounded"
+              className="p-2 bg-yellow-500 text-black rounded"
             >
               Add New Todo
             </button>
@@ -158,7 +171,7 @@ const Todos = () => {
         </div>
         <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
 
-          {selectedUser && filteredTodos.map(todo => (
+          {selectedUser && filteredTodosSearch.map(todo => (
             <TodoCard
               key={todo.id}
               todo={todo}
