@@ -26,18 +26,18 @@ const Navbar = () => {
         </div>
         <ul className={`hidden md:flex space-x-4 items-center`}>
           <li>
-            <Link to="/" className="text-black flex items-center px-4 py-2 md:py-0 hover:bg-gray-100 rounded-md transition duration-300">
-              <FaHome className="mr-1" /> Home
+            <Link to="/" className="text-black text-lg flex items-center px-4 py-2 md:py-0 hover:bg-gray-100 rounded-md transition duration-300">
+              <FaHome size={28} className="mr-1" /> Home
             </Link>
           </li>
           <li>
-            <Link to="/todos" className="text-black flex items-center px-4 py-2 md:py-0 hover:bg-gray-100 rounded-md transition duration-300">
-              <FaTasks className="mr-1" /> Todos
+            <Link to="/todos" className="text-black text-lg flex items-center px-4 py-2 md:py-0 hover:bg-gray-100 rounded-md transition duration-300">
+              <FaTasks size={26} className="mr-1" /> Todos
             </Link>
           </li>
           <li>
-            <Link to="/register" className="text-black flex items-center px-4 py-2 md:py-0 hover:bg-gray-100 rounded-md transition duration-300">
-              <FaUserPlus className="mr-1" /> Register
+            <Link to="/register" className="text-black text-lg flex items-center px-4 py-2 md:py-0 hover:bg-gray-100 rounded-md transition duration-300">
+              <FaUserPlus size={28} className="mr-1" /> Register
             </Link>
           </li>
         </ul>
