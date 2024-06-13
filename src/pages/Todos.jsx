@@ -120,7 +120,10 @@ const Todos = () => {
     <Layout>
       <div className="container mx-auto px-4">
         <h1 className="text-2xl font-bold mb-2 mt-6 text-center">Manage Todos</h1>
-        <p className="text-md mb-8 text-center">Keep your tasks under control, one click at a time!</p>
+        <p className="text-lg text-gray-500 mb-2 text-center">Because even genies need to stay organized! 🧞‍♂️✨</p>
+        {/* &#129502;&#8205;&#9794;&#65039; */}
+        {/* &#10024 */}
+        {/* <p className="text-md mb-8 text-center">Keep your tasks under control, one click at a time!</p> */}
         <div className="mb-4 flex justify-between items-center">
           <select
             value={selectedUser}
@@ -146,7 +149,7 @@ const Todos = () => {
        
             <button
               onClick={handleCreateNewTodo}
-              className="p-2 bg-blue-500 text-white rounded"
+              className="p-2 bg-yellow-500 text-white rounded"
             >
               Add New Todo
             </button>
