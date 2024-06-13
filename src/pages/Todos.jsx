@@ -21,11 +21,13 @@ const Todos = () => {
   }, []);
 
   useEffect(() => {
+    if(!selectedUser) return;
     const fetchTodos = () => {
       let url = 'http://localhost:8083/api/todos';
       if (selectedUser) {
         url = `http://localhost:8083/api/todos/byuser/${selectedUser}`;
       }
+    
       fetch(url)
         .then(response => response.json())
         .then(data => setTodos(data));
@@ -125,11 +127,13 @@ const Todos = () => {
             onChange={(e) => setSelectedUser(e.target.value)}
             className="p-2 border rounded"
           >
-            <option value="">All Users</option>
+            <option value="">Select a user</option>
             {users.map(user => (
               <option key={user.id} value={user.id}>{user.name}</option>
             ))}
           </select>
+          {selectedUser && (
+            <>
           <select
             value={filterOption}
             onChange={(e) => setFilterOption(e.target.value)}
@@ -139,17 +143,19 @@ const Todos = () => {
             <option value="completed">Show Completed</option>
             <option value="all">Show All</option>
           </select>
-          {selectedUser && (
+       
             <button
               onClick={handleCreateNewTodo}
               className="p-2 bg-blue-500 text-white rounded"
             >
               Add New Todo
             </button>
+            </>
           )}
         </div>
         <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredTodos.map(todo => (
+
+          {selectedUser && filteredTodos.map(todo => (
             <TodoCard
               key={todo.id}
               todo={todo}
