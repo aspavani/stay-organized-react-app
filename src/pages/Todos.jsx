@@ -11,6 +11,8 @@ const Todos = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [currentTodo, setCurrentTodo] = useState(null);
   const [isCreateMode, setIsCreateMode] = useState(false);
+  const [filterOption, setFilterOption] = useState('all'); // Default filter option
+
 
   useEffect(() => {
     fetch('http://localhost:8083/api/users')
@@ -102,6 +104,16 @@ const Todos = () => {
         console.error('Error deleting todo:', error);
       });
   };
+
+  const filteredTodos = todos.filter(todo => {
+    if (filterOption === 'pending') {
+      return !todo.completed;
+    } else if (filterOption === 'completed') {
+      return todo.completed;
+    } else {
+      return true; // show all
+    }
+  });
   return (
     <Layout>
       <div className="container mx-auto px-4">
@@ -118,6 +130,15 @@ const Todos = () => {
               <option key={user.id} value={user.id}>{user.name}</option>
             ))}
           </select>
+          <select
+            value={filterOption}
+            onChange={(e) => setFilterOption(e.target.value)}
+            className="p-2 border rounded"
+          >
+            <option value="pending">Show Pending</option>
+            <option value="completed">Show Completed</option>
+            <option value="all">Show All</option>
+          </select>
           {selectedUser && (
             <button
               onClick={handleCreateNewTodo}
@@ -128,7 +149,7 @@ const Todos = () => {
           )}
         </div>
         <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-          {todos.map(todo => (
+          {filteredTodos.map(todo => (
             <TodoCard
               key={todo.id}
               todo={todo}
