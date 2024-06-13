@@ -1,6 +1,6 @@
 // TodoCard.jsx
 import React, { useState, useEffect } from 'react';
-import { FaEdit, FaCheck ,FaTrash} from 'react-icons/fa';
+import { FaEdit, FaCheck, FaUser, FaCalendarAlt, FaTag, FaExclamationCircle, FaTrash } from 'react-icons/fa';
 import TodoDrawer from './TodoDrawer';
 
 
@@ -63,23 +63,23 @@ const TodoCard = ({ todo, user, updateTodo, deleteTodo }) => {
 
   return (
     <>
-      <div className="border rounded shadow p-4 flex flex-col justify-between"
+      <div className={`border rounded-lg  shadow p-4 flex flex-col justify-between text-black ${isCompleted ? 'bg-gray-300' : 'bg-yellow-100'}`}
              onMouseEnter={() => setIsHovered(true)}
              onMouseLeave={() => setIsHovered(false)}>
         <div>
-          <h3 className="text-xl font-bold mb-2">{todo.description}</h3>
-          <p><strong>User:</strong> {user.name} ({user.username})</p>
-          <p><strong>Category:</strong> {todo.category}</p>
-          <p><strong>Deadline:</strong> {todo.deadline}</p>
-          <p><strong>Priority:</strong> {todo.priority}</p>
-          <p><strong>Status:</strong> {isCompleted ? 'Completed' : 'Incomplete'}</p>
+          <h3 className="text-lg font-semibold mb-2">{todo.description}</h3>
+          {/* <p className="flex items-center text-md text-gray-400"><FaUser className="mr-1" />{user.name}</p> */}
+          <p className="flex items-center text-md"><FaTag className="mr-1" />{todo.category}</p>
+          <p className="flex items-center text-md"><FaCalendarAlt className="mr-1" />{todo.deadline}</p>
+          <p className="flex items-center text-md"><FaExclamationCircle className="mr-1" />{todo.priority}</p>
+          {/* <p><strong>Status:</strong> {isCompleted ? 'Completed' : 'Incomplete'}</p> */}
         </div>
         <div className="flex justify-between items-center mt-4">
           <button
             className="text-blue-500 hover:text-blue-700"
             onClick={() => setIsDrawerOpen(true)}
           >
-            <FaEdit />
+            <FaEdit className="text-sky-500"/>
           </button>
 
           {isHovered && (

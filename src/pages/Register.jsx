@@ -64,7 +64,7 @@ const Register = () => {
   return (
     <Layout>
     <div className="container mx-auto px-4">
-      <h1 className="text-2xl font-bold mb-4">Register</h1>
+      <h1 className="text-2xl font-bold mb-4 text-center mt-6">Register</h1>
       {formStatus.message && (
         <div className={`p-4 mb-4 ${formStatus.type === 'success' ? 'bg-green-200' : 'bg-red-200'}`}>
           {formStatus.message}

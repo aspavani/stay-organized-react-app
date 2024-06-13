@@ -119,8 +119,8 @@ const Todos = () => {
   return (
     <Layout>
       <div className="container mx-auto px-4">
-        <h1 className="text-2xl font-bold mb-4">Manage Todos</h1>
-        <p className="text-lg mb-8">Keep your tasks under control, one click at a time!</p>
+        <h1 className="text-2xl font-bold mb-2 mt-6 text-center">Manage Todos</h1>
+        <p className="text-md mb-8 text-center">Keep your tasks under control, one click at a time!</p>
         <div className="mb-4 flex justify-between items-center">
           <select
             value={selectedUser}

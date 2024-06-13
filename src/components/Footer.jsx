@@ -6,7 +6,7 @@ const Footer = () => {
     <footer className="bg-white text-black p-4 text-center shadow-md">
       <div className="container mx-auto flex justify-center items-center">
         <FaRegCopyright className="mr-2" />
-        <p>&copy; 2024 taskGenie. All rights reserved.</p>
+        <p>2024 taskGenie. All rights reserved.</p>
       </div>
     </footer>
   );

@@ -13,10 +13,12 @@ const Navbar = () => {
   return (
     <nav className="bg-white p-4 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
+      <Link to="/">
         <div className="flex items-center">
           <img src={logo} alt="taskGenie Logo" className="h-10 mr-2" />
           <h1 className="text-2xl font-bold text-black">taskGenie</h1>
         </div>
+        </Link>
         <div className="md:hidden">
           <button onClick={toggleMenu} className="text-black focus:outline-none">
             {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
@@ -24,17 +26,17 @@ const Navbar = () => {
         </div>
         <ul className={`hidden md:flex space-x-4 items-center`}>
           <li>
-            <Link to="/" className="text-black flex items-center py-2 md:py-0 hover:bg-gray-100 rounded-md transition duration-300">
+            <Link to="/" className="text-black flex items-center px-4 py-2 md:py-0 hover:bg-gray-100 rounded-md transition duration-300">
               <FaHome className="mr-1" /> Home
             </Link>
           </li>
           <li>
-            <Link to="/todos" className="text-black flex items-center py-2 md:py-0 hover:bg-gray-100 rounded-md transition duration-300">
+            <Link to="/todos" className="text-black flex items-center px-4 py-2 md:py-0 hover:bg-gray-100 rounded-md transition duration-300">
               <FaTasks className="mr-1" /> Todos
             </Link>
           </li>
           <li>
-            <Link to="/register" className="text-black flex items-center py-2 md:py-0 hover:bg-gray-100 rounded-md transition duration-300">
+            <Link to="/register" className="text-black flex items-center px-4 py-2 md:py-0 hover:bg-gray-100 rounded-md transition duration-300">
               <FaUserPlus className="mr-1" /> Register
             </Link>
           </li>
