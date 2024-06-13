@@ -7,11 +7,11 @@ const Hero = () => {
     <section className="bg-white text-black py-20">
       <div className="container mx-auto flex flex-col md:flex-row items-center">
         <div className="md:w-1/2 text-center md:text-left md:pr-8">
-          <h2 className="text-4xl font-bold mb-4">Welcome to taskGenie</h2>
-          <p className="text-xl mb-8">
+          <h2 className="text-4xl font-bold mb-4 text-yellow-500">Welcome to taskGenie!</h2>
+          <p className="text-xl mb-8 ">
             Ready to turn your to-dos into ta-das? With taskGenie, your tasks magically organize themselves! Join us and start genie-fying your task list today.
           </p>
-          <Link to="/todos" className="inline-block bg-black text-white py-2 px-4 rounded hover:bg-gray-800">
+          <Link to="/todos" className="inline-block bg-yellow-300 text-black font-bold py-2 px-4 rounded hover:bg-gray-800">
             Discover Your Tasks
           </Link>
         </div>
