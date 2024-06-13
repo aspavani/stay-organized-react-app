@@ -119,7 +119,7 @@ const Todos = () => {
   return (
     <Layout>
       <div className="container mx-auto px-4">
-        <h1 className="text-2xl font-bold mb-2 mt-6 text-center">Manage Todos</h1>
+        <h1 className="text-3xl text-yellow-500 font-bold mb-2 mt-6 text-center">Manage Todos</h1>
         <p className="text-lg text-gray-500 mb-2 text-center">Because even genies need to stay organized! 🧞‍♂️✨</p>
         {/* &#129502;&#8205;&#9794;&#65039; */}
         {/* &#10024 */}

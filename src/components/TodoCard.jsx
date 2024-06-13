@@ -79,7 +79,7 @@ const TodoCard = ({ todo, user, updateTodo, deleteTodo }) => {
             className="text-blue-500 hover:text-blue-700"
             onClick={() => setIsDrawerOpen(true)}
           >
-            <FaEdit className="text-sky-500"/>
+            <FaEdit className="text-yellow-500"/>
           </button>
 
           {isHovered && (
