@@ -140,7 +140,7 @@ const TodoDrawer = ({ isOpen, onClose, todo, onSave, isCreateMode }) => {
               Completed
             </label>
           )}
-          <button type="submit" className="bg-blue-500 text-white p-2 rounded">
+          <button type="submit" className="bg-yellow-500 text-white p-2 rounded">
             {isCreateMode ? 'Create Todo' : 'Save Changes'}
           </button>
         </form>

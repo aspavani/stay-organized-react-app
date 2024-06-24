@@ -89,7 +89,7 @@ const TodoCard = ({ todo, user, updateTodo, deleteTodo }) => {
           )}
 
           {isCompleted ? (
-            <FaCheck className="text-green-500" />
+            <FaCheck className="text-yellow-500" />
           ) : (
             <label className="flex items-center">
               <input type="checkbox" className="mr-2" onChange={handleCheckboxChange} />
